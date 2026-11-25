@@ -2,8 +2,13 @@ import { useEffect, useState } from 'react'
 import {
   Home, FolderKanban, Palette, Mail, Bookmark, Layers3, Github,
   Linkedin, Download, Menu, X, ArrowUpRight, Code2, Database,
-  Monitor, Smartphone, Send, ExternalLink
+  Monitor, Smartphone, Send, ExternalLink, UserRound
 } from 'lucide-react'
+
+import About from './sections/About';
+import Skills from './sections/Skills';
+import Projects from './sections/Projects';
+import Services from './sections/Services';
 
 const profile = {
   name: 'Saifuddin Mondal',
@@ -16,39 +21,31 @@ const profile = {
 
 const projects = [
   {
-    number: '01',
-    title: 'Ruh & Radiance',
-    type: 'Wellness platform',
-    description: 'A versatile appointment booking website concept designed for doctors, clinics, salons, hotels and business professionals. Built as a customizable demo solution that can be tailored to different business needs, branding and booking workflows. Available for custom development.',
-    stack: ['React', 'Node.js', 'Express', 'MongoDB'],
-    tone: 'sage',
-    link: '#contact',
-  },
+  number: '01',
+  title: 'Liwaas Commerce',
+  type: 'E-commerce Platform',
+  description: 'A collaborative family business e-commerce project.',
+  stack: ['PHP', 'MySQL', 'Tailwind CSS'],
+  tone: 'plum',
+  status: 'Live',
+  link: 'https://liwaas.com',
+  githubUrl: 'https://github.com/saif405-dev'
+},
   {
     number: '02',
-    title: 'Liwaas Commerce',
-    type: 'E-commerce platform',
-    description: 'A premium T-shirt store project with product data, categories, variations and an admin-side management experience. A family business e-commerce platform collaboratively developed with my elder brother, where I contributed primarily to the website development, product management, category organization, product variations and admin dashboard. Built to support our own clothing brand and online shopping experience.',
-    stack: ['PHP', 'MySQL', 'Tailwind CSS'],
-    tone: 'plum',
-    link: 'https://liwaas.com',
+    title: 'Ruh & Radiance',
+    type: 'Wellness Platform Concept',
+    status: 'Concept',
+    link: '#contact',
+    stack: ['React', 'Node.js', 'Express', 'MongoDB'],
   },
   {
     number: '03',
     title: 'Resume Builder',
-    type: 'Web application',
-    description: 'A budget-friendly online Resume Builder platform currently under development. It will allow users to create up to 3 professional CVs for just ₹10, customize their resume details, and download their CVs easily. The platform aims to make professional resume creation simple, accessible, and affordable for everyone.', stack: ['HTML', 'CSS', 'JavaScript'],
-    tone: 'blue',
+    type: 'Web Application',
+    status: 'In Development',
     link: '#contact',
-  },
-  {
-    number: '04',
-    title: 'Admin Dashboard',
-    type: 'Dashboard UI',
-    description: 'An admin interface concept for managing products, categories, brands, inventory and customer reviews through APIs.',
-    stack: ['JavaScript', 'REST API', 'MySQL'],
-    tone: 'amber',
-    link: '#contact',
+    stack: ['HTML', 'CSS', 'JavaScript'],
   },
 ]
 
@@ -59,12 +56,16 @@ const services = [
   { icon: Smartphone, title: 'Responsive UI Design', text: 'Layouts that feel polished and work smoothly across desktop, tablet and mobile.' },
 ]
 
+
 const navItems = [
   { id: 'home', label: 'Home', icon: Home },
+  { id: 'about', label: 'About', icon: UserRound },
+  { id: 'skills', label: 'Skills', icon: Code2 },
   { id: 'projects', label: 'Projects', icon: FolderKanban },
   { id: 'services', label: 'Services', icon: Palette },
   { id: 'contact', label: 'Contact', icon: Mail },
 ]
+
 
 function App() {
   const [active, setActive] = useState('home')
@@ -196,7 +197,7 @@ function App() {
 
                 <div className="visual-card-top">
                   <span>FULL STACK DEVELOPER</span>
-                  <span>IND / 01</span>
+                  <span>IND</span>
                 </div>
 
                 <div className="visual-card-bottom">
@@ -215,29 +216,13 @@ function App() {
               <span>SCROLL TO EXPLORE</span><span className="scroll-line" /><span>01 — 04</span>
             </div>
           </section>
+          <About />
+          <Skills />
+          <Projects
+            projects={projects}
+            onDiscuss={() => navigate('contact')} />
 
-          <section className="page-section" id="projects">
-            <div className="section-kicker">01 / SELECTED WORK</div>
-            <div className="section-title-row"><div><h2>Things I've<br /><em>worked on.</em></h2><p>A few projects, experiments and ideas brought to life.</p></div><span className="count-label">04 PROJECTS</span></div>
-            <div className="project-grid">
-              {projects.map(project => (
-                <article className={`project-card ${project.tone}`} key={project.number}>
-                  <div className="project-art">
-                    <span className="project-number">{project.number} / FEATURED</span>
-                    <div className="art-shape"><div /><div /><div /></div>
-                    <span className="art-word">{project.title.split(' ')[0]}</span>
-                  </div>
-                  <div className="project-info">
-                    <div className="project-type">{project.type}</div>
-                    <h3>{project.title}</h3>
-                    <p>{project.description}</p>
-                    <div className="stack-list">{project.stack.map(item => <span key={item}>{item}</span>)}</div>
-                    <a href="#contact" onClick={(event) => { event.preventDefault(); navigate('contact') }} className="project-open">DISCUSS PROJECT <ArrowUpRight size={14} /></a>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </section>
+          <Services onDiscuss={() => navigate('contact')} />
 
           <section className="page-section" id="services">
             <div className="section-kicker">02 / WHAT I DO</div>
@@ -275,7 +260,7 @@ function App() {
           <footer className="content-footer"><span>© {new Date().getFullYear()} {profile.name.toUpperCase()}</span><span>DESIGNED & BUILT WITH CARE</span><button onClick={() => navigate('home')}>BACK TO TOP ↑</button></footer>
         </main>
       </div>
-    </div>
+    </div >
   )
 }
 
