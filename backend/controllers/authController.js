@@ -36,6 +36,13 @@ const loginAdmin = async (req, res) => {
         message: "Invalid email or password.",
       });
     }
+    
+    if (user.role !== "admin") {
+      return res.status(403).json({
+        success: false,
+        message: "Admin access only.",
+      });
+    }
 
     const token = jwt.sign(
       {

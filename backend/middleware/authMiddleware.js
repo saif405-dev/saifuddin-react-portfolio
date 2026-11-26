@@ -13,6 +13,8 @@ const protect = async (req, res, next) => {
       });
     }
 
+    
+
     const token = authHeader.split(" ")[1];
 
     const decoded = jwt.verify(
@@ -43,6 +45,8 @@ const protect = async (req, res, next) => {
     next();
 
   } catch (error) {
+    console.error("JWT Verification Debug:", error.name, error.message);
+
     if (error.name === "JsonWebTokenError" ||
         error.name === "TokenExpiredError" ||
         error.name === "NotBeforeError") {

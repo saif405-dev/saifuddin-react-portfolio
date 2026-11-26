@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 
 const router = express.Router();
 
-const Message = require("../models/Message");
+const Message = require("../models/message");
 const protect = require("../middleware/authMiddleware");
 
 // GET ALL MESSAGES (Admin Only)

@@ -4,7 +4,7 @@ const { body, validationResult } = require("express-validator");
 
 const router = express.Router();
 
-const Message = require("../models/Message");
+const Message = require("../models/message");
 const { messageLimiter } = require("../middleware/rateLimiter");
 
 // CREATE NEW MESSAGE

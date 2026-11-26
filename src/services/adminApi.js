@@ -1,5 +1,5 @@
-
-const API_URL = "http://localhost:5000/api";
+const API_URL =
+import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 
 export const adminLogin = async (email, password) => {
   const response = await fetch(`${API_URL}/auth/login`, {
@@ -52,6 +52,26 @@ export const updateMessageStatus = async (token, id, status) => {
 
   if (!response.ok) {
     throw new Error(data.message || "Status update failed");
+  }
+
+  return data;
+};
+
+export const deleteMessage = async (token, id) => {
+  const response = await fetch(
+    `${API_URL}/admin/messages/${id}`,
+    {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || "Failed to delete message");
   }
 
   return data;
